@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=./quartz/plugins/quartz-plugins.schema.json
 configuration:
-  pageTitle: 강명균 블로그
+  pageTitle: Root Tree
   pageTitleSuffix: ""
   enableSPA: true
   enablePopovers: true
