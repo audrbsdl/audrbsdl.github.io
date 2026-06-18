@@ -1,5 +1,5 @@
 ---
-title: Welcome to Quartz
+title: 환영합니다!
 ---
 
 This is a blank Quartz installation.
