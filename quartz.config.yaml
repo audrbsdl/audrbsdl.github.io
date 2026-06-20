@@ -4,7 +4,10 @@ configuration:
   pageTitleSuffix: ""
   enableSPA: true
   enablePopovers: true
-  analytics: { provider: 'google', tagId: 'G-QHW0MSY8SZ' }
+  analytics: {
+    provider: 'google',
+    tagId: 'G-QHW0MSY8SZ'
+  }
     provider: plausible
   locale: ko-KR
   baseUrl: audrbsdl.github.io
