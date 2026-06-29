@@ -1,13 +1,10 @@
 # yaml-language-server: $schema=./quartz/plugins/quartz-plugins.schema.json
 configuration:
-  pageTitle: Root Pine
+  pageTitle: audrbsdl.log
   pageTitleSuffix: ""
   enableSPA: true
   enablePopovers: true
-  analytics: {
-    provider: 'google',
-    tagId: 'G-QHW0MSY8SZ'
-  }
+  analytics: { provider: "google", tagId: "G-QHW0MSY8SZ" }
   locale: ko-KR
   baseUrl: audrbsdl.github.io
   ignorePatterns:
