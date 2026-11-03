@@ -1,0 +1,9 @@
+// 글꼴: 본문 Pretendard, 코드 JetBrains Mono
+$sans-serif: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
+  "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+$monospace: "JetBrains Mono", ui-monospace, "D2Coding", Menlo, Consolas, monospace;
+$global-font-family: $sans-serif;
+$header-font-family: $sans-serif;
+$doc-font-size: 15px;        // 테마 기본(16→22px)은 한글엔 커서 한 단계 줄임
+$border-radius: 8px;
+$max-width: 1200px;

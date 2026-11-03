@@ -1,0 +1,345 @@
+/* 라이트·다크 공통 커스텀 스타일 — 색은 각 테마 파일의 변수를 따릅니다 */
+
+/* ==========================================================================
+   전역
+   ========================================================================== */
+
+body {
+  -webkit-font-smoothing: antialiased;
+  word-break: keep-all;          // 한글 단어 중간 줄바꿈 방지
+  overflow-wrap: anywhere;
+}
+
+::selection {
+  background: rgba($primary-color, 0.25);
+  color: inherit;
+}
+
+a {
+  text-decoration: none;
+  &:hover { text-decoration: underline; text-underline-offset: 3px; }
+}
+
+/* ==========================================================================
+   상단 메뉴
+   ========================================================================== */
+
+.masthead {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba($background-color, 0.85);
+  backdrop-filter: saturate(150%) blur(10px);
+  -webkit-backdrop-filter: saturate(150%) blur(10px);
+  border-bottom: 1px solid $border-color;
+}
+
+.masthead__inner-wrap {
+  padding: 0.75em 1em;
+}
+
+.site-title {
+  font-family: $monospace;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  &::before {
+    content: "~/";
+    color: $primary-color;
+    margin-right: 0.1em;
+  }
+}
+
+.greedy-nav {
+  background: transparent;
+  a { font-size: 0.85em; color: $muted-text; }
+  a:hover { color: $masthead-link-color-hover; text-decoration: none; }
+  .visible-links a::before { background: $primary-color; height: 2px; }
+}
+
+/* ==========================================================================
+   사이드바 (작성자)
+   ========================================================================== */
+
+.author__name { font-weight: 700; }
+.author__bio { color: $muted-text; }
+.author__urls { border-color: $border-color; background: $background-color; }
+
+/* ==========================================================================
+   본문
+   ========================================================================== */
+
+.page__content {
+  line-height: 1.8;
+  p, li { font-size: 1em; }
+
+  h1, h2, h3, h4 {
+    letter-spacing: -0.02em;
+    color: $heading-color;
+  }
+  h2 {
+    margin-top: 2.2em;
+    padding-bottom: 0.4em;
+    border-bottom: 1px solid $border-color;
+  }
+  h3 { margin-top: 1.8em; }
+
+  a {
+    border-bottom: 1px solid rgba($primary-color, 0.35);
+    &:hover { border-bottom-color: $primary-color; text-decoration: none; }
+  }
+
+  blockquote {
+    margin-left: 0;
+    margin-right: 0;
+    border-left: 3px solid $primary-color;
+    background: $code-background-color;
+    border-radius: 0 $border-radius $border-radius 0;
+    padding: 0.8em 1.2em;
+    font-style: normal;
+    color: $muted-text;
+  }
+
+  img { border-radius: $border-radius; }
+
+  table {
+    display: table;
+    border-radius: $border-radius;
+    overflow: hidden;
+  }
+  th { background: $code-background-color; }
+  td, th { border-color: $border-color; }
+
+  hr { border-color: $border-color; }
+}
+
+.page__title {
+  font-size: 1.9em;
+  letter-spacing: -0.03em;
+  line-height: 1.3;
+}
+
+.page__meta, .page__taxonomy, .archive__item-excerpt {
+  color: $muted-text;
+}
+
+/* 인라인 코드 */
+p > code, li > code, td > code, a > code {
+  font-family: $monospace;
+  font-size: 0.85em;
+  padding: 0.15em 0.4em;
+  border-radius: 5px;
+  background: $code-background-color;
+  border: 1px solid $border-color;
+  color: $inline-code-color;
+}
+
+/* 코드 블록 */
+div.highlighter-rouge, figure.highlight {
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+  overflow: hidden;
+  &::before {               // 테마가 붙이는 언어 라벨 정리
+    background: $code-background-color-dark;
+    color: $muted-text;
+    font-family: $monospace;
+    border-bottom-left-radius: $border-radius;
+  }
+}
+.highlight pre, pre.highlight {
+  font-family: $monospace;
+  font-size: 0.82em;
+  line-height: 1.65;
+}
+
+/* 목차 */
+.toc {
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+  background: transparent;
+  box-shadow: none;
+  .nav__title {
+    background: transparent;
+    color: $muted-text;
+    font-family: $monospace;
+    font-size: 0.7em;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border-bottom: 1px solid $border-color;
+  }
+  .toc__menu a {
+    color: $muted-text;
+    border-bottom-color: $border-color;
+    &:hover { color: $primary-color; background: transparent; }
+  }
+  .toc__menu .active, .toc__menu .active a { color: $primary-color; }
+}
+
+/* 태그·카테고리 버튼 */
+.page__taxonomy-item {
+  border: 1px solid $border-color;
+  border-radius: 999px;
+  background: transparent;
+  color: $muted-text;
+  padding: 0.25em 0.8em;
+  &:hover { border-color: $primary-color; color: $primary-color; text-decoration: none; }
+}
+
+/* 알림 박스 */
+.notice, .notice--info, .notice--primary, .notice--warning,
+.notice--danger, .notice--success {
+  border-radius: $border-radius;
+  box-shadow: none;
+}
+
+/* 버튼 */
+.btn--primary {
+  background: $primary-color;
+  color: $background-color;
+  border-radius: $border-radius;
+  font-weight: 700;
+  &:hover { background: $link-color-hover; color: $background-color; }
+}
+
+/* ==========================================================================
+   글 목록 (홈·아카이브)
+   ========================================================================== */
+
+.archive__subtitle {
+  font-family: $monospace;
+  font-size: 0.75em;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: $muted-text;
+  border-bottom: 1px solid $border-color;
+}
+
+.list__item .archive__item {
+  padding: 1.1em 1.2em;
+  margin-bottom: 0.9em;
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+  &:hover {
+    border-color: rgba($primary-color, 0.6);
+    transform: translateY(-1px);
+  }
+}
+
+.archive__item-title {
+  margin-top: 0;
+  font-size: 1.15em;
+  letter-spacing: -0.02em;
+  a { color: $heading-color; }
+  a:hover { color: $primary-color; text-decoration: none; }
+}
+
+.archive__item-excerpt { font-size: 0.85em; margin-bottom: 0.3em; }
+.page__meta { font-family: $monospace; font-size: 0.7em; }
+
+.taxonomy__index a {
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+  &:hover { border-color: $primary-color; }
+}
+.taxonomy__count { color: $primary-color; }
+
+/* 페이지 번호 */
+.pagination li a {
+  border-color: $border-color;
+  color: $muted-text;
+  &.current { background: $primary-color; color: $background-color; border-color: $primary-color; }
+}
+
+/* ==========================================================================
+   홈 상단 소개
+   ========================================================================== */
+
+.home-hero {
+  margin: 0.5em 0 2.5em;
+  padding: 1.8em 1.6em;
+  border: 1px solid $border-color;
+  border-radius: 12px;
+  background:
+    radial-gradient(120% 140% at 0% 0%, rgba($primary-color, 0.10), transparent 55%),
+    $code-background-color;
+
+  &__prompt {
+    margin: 0 0 0.6em;
+    font-family: $monospace;
+    font-size: 0.75em;
+    color: $primary-color;
+  }
+  &__title {
+    margin: 0 0 0.4em;
+    font-size: 1.6em;
+    letter-spacing: -0.03em;
+    line-height: 1.35;
+    color: $heading-color;
+  }
+  &__desc {
+    margin: 0 0 1.2em;
+    color: $muted-text;
+    font-size: 0.95em;
+  }
+}
+
+.home-cats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45em;
+    padding: 0.35em 0.9em;
+    font-size: 0.8em;
+    border: 1px solid $border-color;
+    border-radius: 999px;
+    color: $text-color;
+    background: $background-color;
+    &:hover { border-color: $primary-color; color: $primary-color; text-decoration: none; }
+  }
+  span {
+    font-family: $monospace;
+    font-size: 0.85em;
+    color: $muted-text;
+  }
+}
+
+/* ==========================================================================
+   푸터
+   ========================================================================== */
+
+.page__footer {
+  border-top: 1px solid $border-color;
+  color: $muted-text;
+  footer { padding-top: 1.5em; }
+}
+.page__footer-copyright { font-family: $monospace; font-size: 0.7em; }
+
+/* ==========================================================================
+   테마 전환 버튼
+   ========================================================================== */
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.2em;
+  height: 2.2em;
+  margin: 0 0.25em 0 0.75em;
+  padding: 0;
+  border: 1px solid $border-color;
+  border-radius: 999px;
+  background: transparent;
+  color: $muted-text;
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease;
+  &:hover { color: $primary-color; border-color: $primary-color; }
+  &:focus { outline: none; box-shadow: none; }
+  &:focus-visible { outline: 2px solid $primary-color; outline-offset: 2px; }
+}

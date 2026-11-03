@@ -1,0 +1,35 @@
+---
+# 라이트 테마
+search: false
+---
+
+@charset "utf-8";
+
+$background-color: #ffffff;
+$text-color: #2b3038;
+$heading-color: #111418;
+$muted-text: #6b7280;
+$primary-color: #0d9488;
+$border-color: #e5e7eb;
+$code-background-color: #f6f8fa;
+$code-background-color-dark: #eef1f4;
+$form-background-color: #f6f8fa;
+$footer-background-color: #f6f8fa;
+$link-color: #0d9488;
+$link-color-hover: #0f766e;
+$link-color-visited: #0d9488;
+$masthead-link-color: #2b3038;
+$masthead-link-color-hover: #0d9488;
+$navicon-link-color-hover: #f6f8fa;
+$inline-code-color: #c0367a;
+
+// 코드 하이라이트 (GitHub Light 계열)
+$base00: #f6f8fa; $base01: #eef1f4; $base02: #d0d7de; $base03: #6e7781;
+$base04: #57606a; $base05: #24292f; $base06: #1f2328; $base07: #000000;
+$base08: #cf222e; $base09: #953800; $base0a: #9a6700; $base0b: #116329;
+$base0c: #0550ae; $base0d: #0550ae; $base0e: #8250df; $base0f: #cf222e;
+
+@import "custom/shared";
+@import "minimal-mistakes/skins/default";
+@import "minimal-mistakes";
+@import "custom/overrides";

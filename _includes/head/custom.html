@@ -6,4 +6,32 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap">
 
 <meta name="theme-color" content="#0f1216">
-<meta name="color-scheme" content="dark">
+<meta name="color-scheme" content="dark light">
+
+<!-- 라이트/다크 테마: 두 스타일시트를 모두 불러두고 media로 켜고 끕니다 -->
+<link rel="stylesheet" id="theme-light-css" href="{{ '/assets/css/main-light.css' | relative_url }}" media="none">
+<script>
+  (function () {
+    var root = document.documentElement;
+    var mq = window.matchMedia('(prefers-color-scheme: light)');
+    function saved() { try { return localStorage.getItem('theme'); } catch (e) { return null; } }
+    function apply(t) {
+      var dark = document.querySelector('link[href$="/assets/css/main.css"]');
+      var light = document.getElementById('theme-light-css');
+      if (dark) dark.media = t === 'light' ? 'none' : 'all';
+      if (light) light.media = t === 'light' ? 'all' : 'none';
+      root.setAttribute('data-theme', t);
+      var meta = document.querySelector('meta[name="theme-color"]');
+      if (meta) meta.content = t === 'light' ? '#ffffff' : '#0f1216';
+    }
+    window.__theme = {
+      current: function () { return root.getAttribute('data-theme'); },
+      set: function (t) { try { localStorage.setItem('theme', t); } catch (e) {} apply(t); }
+    };
+    // 저장된 선택 → 없으면 기기 설정을 따름
+    apply(saved() || (mq.matches ? 'light' : 'dark'));
+    if (mq.addEventListener) mq.addEventListener('change', function (e) {
+      if (!saved()) apply(e.matches ? 'light' : 'dark');
+    });
+  })();
+</script>
