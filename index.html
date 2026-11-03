@@ -1,7 +1,23 @@
 ---
-# You don't need to edit this file, it's empty on purpose.
-# Edit theme's home layout instead if you wanna make some changes
-# See: https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 layout: home
 author_profile: true
 ---
+
+<section class="home-hero">
+  <p class="home-hero__prompt">$ whoami</p>
+  <h1 class="home-hero__title">{{ site.subtitle }}</h1>
+  <p class="home-hero__desc">{{ site.description }}</p>
+
+  {% assign cats = site.categories | sort %}
+  {% if cats.size > 0 %}
+  <ul class="home-cats">
+    {% for cat in cats %}
+    <li>
+      <a href="{{ '/categories/' | relative_url }}#{{ cat[0] | slugify }}">
+        {{ cat[0] }} <span>{{ cat[1].size }}</span>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+</section>

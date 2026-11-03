@@ -1,55 +1,46 @@
-# Welcome to Jekyll!
-#
-# This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely edit after that. If you find
-# yourself editing this file very often, consider using Jekyll's data files
-# feature for the data you need to update frequently.
-#
-# For technical reasons, this file is *NOT* reloaded automatically when you use
-# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
+# 사이트 전역 설정
+# 수정 후 로컬에서는 `bundle exec jekyll serve`를 재시작해야 반영됩니다.
 
-# Site settings
-# These are used to personalize your new site. If you look in the HTML files,
-# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
-# You can create any custom variable you would like, and they will be accessible
-# in the templates via {{ site.myvariable }}.
-title: MM
-email:
-description: >- # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
-twitter_username: username
-github_username: username
-minimal_mistakes_skin: default
+# ── 사이트 정보 ───────────────────────────────────────────
+locale: "ko-KR"
+title: "audrbsdl.log"           # TODO: 원하는 블로그 이름으로 바꾸세요
+title_separator: "·"
+subtitle: "배우고, 만들고, 기록합니다"
+name: "audrbsdl"
+description: >-
+  배우고 만든 것들을 주제별로 정리해 두는 개인 기술 블로그입니다.
+url: "https://audrbsdl.github.io"
+baseurl: ""
+repository: "audrbsdl/audrbsdl.github.io"
+github_username: audrbsdl
+minimal_mistakes_skin: dark      # 기본 다크 스킨 위에 assets/css/main.scss로 덮어씁니다
 search: true
+search_full_content: true
 
-# Build settings
+# ── 빌드 ─────────────────────────────────────────────────
 markdown: kramdown
 remote_theme: mmistakes/minimal-mistakes
-# Outputting
 permalink: /:categories/:title/
-paginate: 5 # amount of posts to show
+paginate: 8
 paginate_path: /page:num/
-timezone: # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+timezone: Asia/Seoul
+
+kramdown:
+  input: GFM
+  hard_wrap: false
+  syntax_highlighter: rouge
 
 include:
   - _pages
 
-# Exclude from processing.
-# The following items will not be processed, by default. Create a custom list
-# to override the default setting.
-# exclude:
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
+exclude:
+  - vendor
+  - Gemfile
+  - Gemfile.lock
+  - README.md
 
-# Plugins (previously gems:)
 plugins:
+  - jekyll-remote-theme
   - jekyll-paginate
   - jekyll-sitemap
   - jekyll-gist
@@ -57,36 +48,27 @@ plugins:
   - jemoji
   - jekyll-include-cache
 
+# ── 작성자 (사이드바) ────────────────────────────────────
 author:
-  name   : "First Lastname"
-  avatar : "/assets/images/bio-photo.jpg"
-  bio    : "My awesome biography constrained to a sentence or two goes here."
+  name   : "audrbsdl"
+  # avatar : "/assets/images/avatar.png"   # 내 사진/아이콘을 넣고 주석을 푸세요
+  bio    : "배운 것을 기록하는 블로그"       # TODO: 한두 줄 소개
+  location: "Seoul, Korea"
   links:
-    - label: "Website"
-      icon: "fas fa-fw fa-link"
-      url: "https://"
-    - label: "Twitter"
-      icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "https://github.com/"
-    - label: "Instagram"
-      icon: "fab fa-fw fa-instagram"
-      url: "https://instagram.com/"
+      url: "https://github.com/audrbsdl"
 
 footer:
   links:
-    - label: "Twitter"
-      icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "https://github.com/"
-    - label: "Instagram"
-      icon: "fab fa-fw fa-instagram"
-      url: "https://instagram.com/"
+      url: "https://github.com/audrbsdl"
+    - label: "RSS"
+      icon: "fas fa-fw fa-rss"
+      url: "/feed.xml"
 
+# ── 기본값 ───────────────────────────────────────────────
 defaults:
   # _posts
   - scope:
@@ -96,9 +78,14 @@ defaults:
       layout: single
       author_profile: true
       read_time: true
-      comments: true
-      share: true
+      words_per_minute: 400       # 한글 기준으로 읽기 시간 보정
+      show_date: true
+      toc: true
+      toc_sticky: true
+      toc_label: "목차"
+      share: false
       related: true
+      comments: false
   # _pages
   - scope:
       path: "_pages"
@@ -106,6 +93,8 @@ defaults:
     values:
       layout: single
       author_profile: true
+
+date_format: "%Y.%m.%d"
 
 category_archive:
   type: liquid
