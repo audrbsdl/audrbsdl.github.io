@@ -3,7 +3,7 @@
 
 # ── 사이트 정보 ───────────────────────────────────────────
 locale: "ko-KR"
-title: "audrbsdl.log"           # TODO: 원하는 블로그 이름으로 바꾸세요
+title: "audrbsdl.log" # TODO: 원하는 블로그 이름으로 바꾸세요
 title_separator: "·"
 subtitle: "배우고, 만들고, 기록합니다"
 name: "audrbsdl"
@@ -13,9 +13,13 @@ url: "https://audrbsdl.github.io"
 baseurl: ""
 repository: "audrbsdl/audrbsdl.github.io"
 github_username: audrbsdl
-minimal_mistakes_skin: dark      # 기본 다크 스킨 위에 assets/css/main.scss로 덮어씁니다
+minimal_mistakes_skin: dark # 기본 다크 스킨 위에 assets/css/main.scss로 덮어씁니다
 search: true
 search_full_content: true
+analytics:
+  provider: "google-gtag"
+  google:
+    tracking_id: "G-QHW0MSY8SZ"
 
 # ── 빌드 ─────────────────────────────────────────────────
 markdown: kramdown
@@ -50,9 +54,9 @@ plugins:
 
 # ── 작성자 (사이드바) ────────────────────────────────────
 author:
-  name   : "audrbsdl"
+  name: "audrbsdl"
   # avatar : "/assets/images/avatar.png"   # 내 사진/아이콘을 넣고 주석을 푸세요
-  bio    : "배운 것을 기록하는 블로그"       # TODO: 한두 줄 소개
+  bio: "배운 것을 기록하는 블로그" # TODO: 한두 줄 소개
   location: "Seoul, Korea"
   links:
     - label: "GitHub"
@@ -78,7 +82,7 @@ defaults:
       layout: single
       author_profile: true
       read_time: true
-      words_per_minute: 400       # 한글 기준으로 읽기 시간 보정
+      words_per_minute: 400 # 한글 기준으로 읽기 시간 보정
       show_date: true
       toc: true
       toc_sticky: true
