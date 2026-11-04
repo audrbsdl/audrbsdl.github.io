@@ -38,15 +38,21 @@ a {
   padding: 0.75em 1em;
 }
 
-.site-title {
+// .greedy-nav a { display: block } 때문에 템플릿 줄바꿈이 공백으로 보여
+// "~/ audrbsdl"처럼 벌어짐 → flex로 바꿔 공백을 없애고 부제는 다음 줄로
+.greedy-nav .site-title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
   font-family: $monospace;
   font-weight: 700;
   letter-spacing: -0.02em;
   &::before {
     content: "~/";
     color: $primary-color;
-    margin-right: 0.1em;
+    margin-right: 0.08em;
   }
+  .site-subtitle { flex-basis: 100%; }
 }
 
 .greedy-nav {
