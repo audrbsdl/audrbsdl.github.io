@@ -52,7 +52,15 @@ a {
     color: $primary-color;
     margin-right: 0.08em;
   }
-  .site-subtitle { flex-basis: 100%; }
+  // 부제가 타이틀의 고정폭 글꼴을 물려받아 쉼표가 한 칸을 통째로 차지함
+  // → 본문 글꼴로 바꿔 "배우고, 만들고," 사이 간격을 자연스럽게
+  .site-subtitle {
+    flex-basis: 100%;
+    font-family: $sans-serif;
+    font-weight: 500;
+    letter-spacing: 0;
+    color: $muted-text;
+  }
 }
 
 .greedy-nav {
