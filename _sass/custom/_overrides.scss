@@ -236,12 +236,45 @@ div.highlighter-rouge, figure.highlight {
 .archive__item-excerpt { font-size: 0.85em; margin-bottom: 0.3em; }
 .page__meta { font-family: $monospace; font-size: 0.7em; }
 
-.taxonomy__index a {
-  border: 1px solid $border-color;
-  border-radius: $border-radius;
-  &:hover { border-color: $primary-color; }
+/* 카테고리·태그 목록 버튼
+   테마 원본은 밑줄형 목록(padding 0.25em 0, space-between)이라
+   테두리를 씌우면 글자가 양 끝에 붙음 → 좌우 여백과 간격을 줌 */
+.taxonomy__index {
+  grid-column-gap: 0.75em;
+  grid-row-gap: 0.75em;
+  grid-template-columns: repeat(2, minmax(0, 1fr));   // 긴 이름이 열을 넓히지 않게
+  font-size: 0.8em;
+  @include breakpoint($large) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+  a {
+    align-items: center;
+    gap: 0.75em;
+    padding: 0.7em 1em;
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+    transition: border-color 0.15s ease, color 0.15s ease;
+
+    strong {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-weight: 600;
+    }
+    &:hover { border-color: $primary-color; color: $primary-color; }
+  }
 }
-.taxonomy__count { color: $primary-color; }
+.taxonomy__count {
+  flex-shrink: 0;
+  min-width: 1.8em;
+  padding: 0.1em 0.55em;
+  border-radius: 999px;
+  background: rgba($primary-color, 0.12);
+  color: $primary-color;
+  font-family: $monospace;
+  font-size: 0.85em;
+  text-align: center;
+}
 
 /* 페이지 번호 */
 .pagination li a {

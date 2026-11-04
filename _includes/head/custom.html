@@ -8,30 +8,71 @@
 <meta name="theme-color" content="#0f1216">
 <meta name="color-scheme" content="dark light">
 
-<!-- 라이트/다크 테마: 두 스타일시트를 모두 불러두고 media로 켜고 끕니다 -->
-<link rel="stylesheet" id="theme-light-css" href="{{ '/assets/css/main-light.css' | relative_url }}" media="none">
+<!--
+  라이트/다크 테마
+  - 다크: 테마가 넣는 /assets/css/main.css
+  - 라이트: /assets/css/main-light.css (아래 스크립트가 넣음)
+  첫 화면이 라이트면 라이트 CSS를 "렌더링을 막는" 방식으로 넣어서,
+  CSS가 다 올 때까지 화면을 그리지 않게 합니다 → 날것의 HTML이 보이지 않음.
+  버튼으로 전환할 때는 새 CSS가 다 내려받아진 뒤에 이전 CSS를 끕니다.
+-->
 <script>
   (function () {
     var root = document.documentElement;
+    var LIGHT_HREF = "{{ '/assets/css/main-light.css' | relative_url }}";
+    var OFF = 'not all';   // 적용은 안 하지만 미리 내려받아 두는 media 값
     var mq = window.matchMedia('(prefers-color-scheme: light)');
+
     function saved() { try { return localStorage.getItem('theme'); } catch (e) { return null; } }
-    function apply(t) {
-      var dark = document.querySelector('link[href$="/assets/css/main.css"]');
-      var light = document.getElementById('theme-light-css');
-      if (dark) dark.media = t === 'light' ? 'none' : 'all';
-      if (light) light.media = t === 'light' ? 'all' : 'none';
+    function darkLink() { return document.querySelector('link[href$="/assets/css/main.css"]'); }
+    function lightLink() { return document.getElementById('theme-light-css'); }
+    function loaded(link) {
+      try { return !!(link && link.sheet && link.sheet.cssRules.length); } catch (e) { return !!(link && link.sheet); }
+    }
+
+    function setMeta(t) {
       root.setAttribute('data-theme', t);
       var meta = document.querySelector('meta[name="theme-color"]');
       if (meta) meta.content = t === 'light' ? '#ffffff' : '#0f1216';
     }
+
+    // 켜려는 CSS를 먼저 켜고, 다 받아진 걸 확인한 뒤에 다른 CSS를 끔
+    function apply(t) {
+      var on = t === 'light' ? lightLink() : darkLink();
+      var off = t === 'light' ? darkLink() : lightLink();
+      setMeta(t);
+      if (!on) return;
+      on.media = 'all';
+      function finish() { if (root.getAttribute('data-theme') === t && off) off.media = OFF; }
+      if (loaded(on)) finish();
+      else on.addEventListener('load', finish, { once: true });
+    }
+
+    var initial = saved() || (mq.matches ? 'light' : 'dark');
+    setMeta(initial);
+
+    // document.write보다 먼저 정의해야 함 (CSS가 캐시에 있으면 아래 <script>가 즉시 실행됨)
     window.__theme = {
+      _init: function () {
+        if (initial === 'light') { var d = darkLink(); if (d) d.media = OFF; }
+      },
       current: function () { return root.getAttribute('data-theme'); },
       set: function (t) { try { localStorage.setItem('theme', t); } catch (e) {} apply(t); }
     };
-    // 저장된 선택 → 없으면 기기 설정을 따름
-    apply(saved() || (mq.matches ? 'light' : 'dark'));
+
+    // 파서가 직접 읽는 <link>로 넣어야 렌더링이 CSS를 기다려 줌.
+    // 바로 뒤의 <script>는 앞의 CSS가 모두 받아진 뒤에 실행되므로
+    // 첫 화면을 그리기 전에 다크 CSS를 끌 수 있음.
+    document.write(
+      '<link rel="stylesheet" id="theme-light-css" href="' + LIGHT_HREF + '"' +
+      (initial === 'light' ? '' : ' media="' + OFF + '"') + '>' +
+      '<script>window.__theme._init();<\/script>'
+    );
+
+    // 저장된 선택이 없을 때만 기기 설정 변경을 따라감
     if (mq.addEventListener) mq.addEventListener('change', function (e) {
       if (!saved()) apply(e.matches ? 'light' : 'dark');
     });
   })();
 </script>
+<noscript><style>.theme-toggle { display: none; }</style></noscript>
